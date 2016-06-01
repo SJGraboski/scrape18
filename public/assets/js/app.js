@@ -27,20 +27,29 @@ function Article(title, nutgraf, image, link, date, note, arr){
 // 2: Functions
 // ============
 var load = function(){
-	// define the url we'll retrieve articles from
-	var url = "api/articles";
-	// make call to our api
-	$.get(url, function(data){
-		// on success, we grab the data and place it in the articles array
-		// using the article class constructor above
-		$.each(data, function(i){
-			new Article(data[i].title, 
-									data[i].nutgraf, 
-									data[i].image, 
-									data[i].link, 
-									data[i].date,
-									data[i].note);
-		})
+	// first, we scrape
+	$.get('api/scrape', function(){
+		console.log("scrape OKAY")
+		// if the scrape is successful, make the next api call
+		// to grab articles from the db
+		// $.get("api/articles", function(data){
+		// 	// on success, we grab the data and place it in the articles array
+		// 	// using the article class constructor above
+		// 	$.each(data, function(i){
+		// 		new Article(data[i].title, 
+		// 								data[i].nutgraf, 
+		// 								data[i].image, 
+		// 								data[i].link, 
+		// 								data[i].date,
+		// 								data[i].note
+		// 							);
+		// 	})
+		// 	console.log(articles);
+		// })
 	})
-	console.log(articles);
 }
+
+// calls
+$(document).on("ready", function(){
+	load();
+})

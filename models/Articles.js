@@ -1,13 +1,13 @@
 // set up our mongoose schema class
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema
+var Schema = mongoose.Schema;
 
 // make our Article schema
 var ArticlesSchema = new Schema({
 	title: {
 		type: String,
-		unique: true,
-		required:true
+		required: true,
+		unique: true
 	},
 	nutgraf: {
 		type: String,
@@ -15,20 +15,17 @@ var ArticlesSchema = new Schema({
 	},
 	image: {
 		type: String,
-		required:true
 	},
 	link: {
 		type: String,
 		required:true
 	},
-	date: {
-		type: String,
-		required:true
-	},
 	note: {
 		type: Schema.Types.ObjectId,
-		ref: 'Comments'
+		ref: 'Comments',
 	}
+},{
+	timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
 
 var Articles = mongoose.model('Articles', ArticlesSchema);
