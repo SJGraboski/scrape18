@@ -56,7 +56,7 @@ module.exports = function(app) {
 	app.get('/api/retrieve', function(req, res) {
 
 		// reach into the Articles db for at least 50 results
-		var query = Articles.find().sort({'createdAt': -1}).limit(50);
+		var query = Articles.find().sort({'created_at': -1}).limit(50);
 		query.exec(function(err, docs) {
 			if (err){
 				console.log(error)
