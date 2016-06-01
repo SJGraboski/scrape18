@@ -33,8 +33,6 @@ module.exports = function(app) {
 		  	})
 		  };
 	  	// with all that done, prepare to insert all non-duplicates into db
-	  	// the ordered:false option lets all docs have a chance at insertion,
-	  	// otherwise, one error (read: duplicate) would kill the whole process.
 	  	Articles.create(articles, onInsert);
 
 	  	// create the callback that the last method called
