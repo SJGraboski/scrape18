@@ -37,7 +37,7 @@ require('./routes/api.js')(app);
 
 
 // configure our db with mongoose
-mongoose.connect('mongodb://heroku_cxkb5sd5:18scrape@ds021663.mlab.com:21663/heroku_cxkb5sd5');
+mongoose.connect('mongodb://heroku_cxkb5sd5:hi0639lfao57ok35djfampfgt2@ds021663.mlab.com:21663/heroku_cxkb5sd5');
 var db = mongoose.connection;
 
 // mongoose connection: if err, tell us what's up
