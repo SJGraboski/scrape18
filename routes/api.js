@@ -40,7 +40,7 @@ module.exports = function(app) {
 	  	// create the callback that the last method called
 	  	function onInsert(err, docs){
 	  		if (err){
-	  			// for error, 200 (OK (nothing created, but not an end))
+	  			// for error, 200 (OK (nothing created, but not a deadend for our app))
 	  			console.log(err);
 	  			res.status(200).end();
 	  		} else {
@@ -65,4 +65,42 @@ module.exports = function(app) {
 			}
 		})
 	})
+
+	// grab comments for an article
+	app.get('/api/comment/:id', function(req, res){
+		Articles.findOne({'_id': req.params.id})
+		.populate('comment')
+		.exec(function(err, doc){
+			if (err){
+				console.log(err);
+			} else {
+				res.json(doc);
+			}
+		});
+	});
+	// post a comment
+	app.post('/api/comment/:id', function(req, res){
+	// using the body of the post, create a comment
+	var comment = new Comments(req.body);
+
+	comment.save(function(err, doc){
+		if(err){
+			console.log(err);
+		} else {
+			Articles.findOneAndUpdate(
+				{'_id': req.params.id}, 
+				{$push: {'comment':doc._id}},
+				{safe: true, upsert: true})
+			.exec(function(err, doc){
+				if (err){
+					console.log(err);
+				} else {
+					console.log("ok!")
+					res.status(201).end();
+				}
+			});
+
+		}
+	});
+});
 }

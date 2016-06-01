@@ -20,10 +20,10 @@ var ArticlesSchema = new Schema({
 		type: String,
 		required:true
 	},
-	note: {
+	comment: [{
 		type: Schema.Types.ObjectId,
 		ref: 'Comments',
-	}
+	}]
 },{
 	timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });

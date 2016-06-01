@@ -77,19 +77,28 @@ var dispArticle = function(){
 	$('#articleCounter').text("Article " + (cur_article) + 
 														" of " + articles.length);
 
+	// Part2: Display the comments
+	// first, make the url for the comments (both get and post)
+	var url = "api/comment/" + article.id;
+	// then, grab the comments related to the article with a get request
+	$.get(url, function(result){
+		// save the comments from the result into an array
+		var comments = result.comment;
+		console.log(comments);
+	})
 
 	// Part3: Display the Comment Form
-	// first, save the default form
-		var comForm = '<form id="leaveComment" action="api/comment/' + article.id +'" method="POST" role="form">' +
-										'<legend>Leave a Comment</legend>' +
-											'<div class="form-group">' +
-												'<input type="text" class="form-control" id="title" name="title" placeholder="Title">' +
-												'<textarea type="text" class="form-control" id="body" name="body" rows="5" placeholder="Comment Text"></textarea>' +
-											'</div>' +
-											'<button type="submit" class="btn btn-primary">Submit</button>' +
-									'</form>';
+	// first, save the form along with the url that we'll be posting to
+	var comForm = '<form id="leaveComment" action="' + url + '" method="POST" role="form">' +
+									'<legend>Leave a Comment</legend>' +
+										'<div class="form-group">' +
+											'<input type="text" class="form-control" id="title" name="title" placeholder="Title">' +
+											'<textarea type="text" class="form-control" id="body" name="body" rows="5" placeholder="Comment Text"></textarea>' +
+										'</div>' +
+										'<button type="submit" id="submit" class="btn btn-primary">Submit</button>' +
+								'</form>';
 
-		// place the form on the page
+		// then, place the form on the page
 		$('#commentForm').html(comForm);
 }
 
@@ -117,6 +126,33 @@ var articleSwitch = function(isPrev) {
 	dispArticle();
 }
 
+// 3. FORM FUNCTIONS
+// =================
+
+// a) Comment form
+var commentForm = function(){
+	// grab the form information, save it to data var
+	var data = {
+		title: $('#title').val().trim(),
+		body: $('#body').val().trim()
+	}
+
+	// if data.title or data.body is empty, stop the function
+	if (data.title == "" || data.body == "") {
+		return false
+	}
+
+	// make the url from the form's action attr
+	var url = $('#leaveComment').attr('action');
+	debugger;
+	// make the api call
+	$.post(url, data, function(){
+		console.log('ok');
+		// on success, reload the article, along with new comment
+		dispArticle();
+	})
+}
+
 
 // calls
 // =====
@@ -126,7 +162,7 @@ $(document).on("ready", function(){
 	load();
 })
 
-// on press next and prev buttons
+// on pressing next and prev buttons
 $(document).on('click', '#prev', function(){
 	// isPrev = true
 	articleSwitch(true);
@@ -135,4 +171,11 @@ $(document).on('click', '#prev', function(){
 $(document).on('click', '#next', function(){
 	// isPrev = false
 	articleSwitch(false);
+})
+
+// on pressing comment submit button
+$(document).on('click', '#submit', function(){
+	commentForm();
+	// prevent refresh
+	return false;
 })
