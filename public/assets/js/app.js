@@ -95,7 +95,7 @@ var dispArticle = function(){
 										 .html(comments[i].title + 
 										 			"<span class='glyphicon glyphicon-remove delete' data-id='"+ comments[i]._id +"'></span>");
 			var c_body = $('<p>').addClass('commentBody')
-										 .text(comments[i].body)
+										 .text(comments[i].body);
 			var c_date = $('<p>').addClass('commentDate')
                    .text("- " + moment(comments[i].time).format("MMMM DD, YYYY - hh:mma "));
 			
@@ -142,7 +142,7 @@ var articleSwitch = function(isPrev) {
 		cur_article--;
 		// but if that made cur_article equal 0, make cur_article = maxArticles
 		if (cur_article == 0){
-			cur_article = maxArticles
+			cur_article = maxArticles;
 		}
 	} 
 	// with all that done, display the article
