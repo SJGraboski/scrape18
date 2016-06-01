@@ -1,8 +1,13 @@
+body {
+	background-color: #FFF7F1;
+}
+
 h1 {
 	font-family: paralucent-stencil, sans-serif;
 }
 
 h2 {
+	font-family: paralucent-stencil, sans-serif;
 	text-align: center;
 	margin-bottom: 5px;
 	margin-top: 5px;
@@ -35,6 +40,7 @@ p.storyNutgraf {
 .commentDate{
 	font-size:10px;
 	font-style:italic;
+	margin-bottom: 30px;
 }
 
 h3{
