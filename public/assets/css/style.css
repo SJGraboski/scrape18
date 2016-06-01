@@ -47,6 +47,10 @@ a{
 	color: #00B262;
 }
 
+a:hover{
+	color: #00FF8C;
+}
+
 h3{
 	border-bottom: 1px solid #e2e2e2;
 	margin-top: 3px;
