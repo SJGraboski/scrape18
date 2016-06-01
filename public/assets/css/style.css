@@ -66,6 +66,10 @@ p.storyNutgraf {
 	margin-bottom: 5px;
 }
 
+#commentForm {
+	margin-bottom: 800px;
+}
+
 .commentDate{
 	font-size:10px;
 	font-style:italic;
