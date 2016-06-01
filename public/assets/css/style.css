@@ -57,3 +57,7 @@ span:hover {
 span {
 	color: #B0171F;
 }
+
+#title {
+	margin-bottom: 5px;
+}
