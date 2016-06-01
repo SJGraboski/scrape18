@@ -55,6 +55,11 @@ h3{
 	border-bottom: 1px solid #e2e2e2;
 	margin-top: 3px;
 	font-weight: normal;
+	font-family: paralucent-stencil, sans-serif;
+}
+
+legend {
+	font-family: paralucent-stencil, sans-serif;
 }
 
 span:hover {
