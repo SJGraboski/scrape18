@@ -1,3 +1,4 @@
+/* Basic Style rules */
 body {
 	background-color: #FFF7F1;
 }
@@ -31,6 +32,8 @@ a:hover{
 	color: #18CC14;
 }
 
+/* specific rules for specific items */
+/* Story rules */
 p.storyNum{
 	text-align: center;
 	font-size: 20px;
@@ -45,6 +48,11 @@ p.storyNutgraf {
 	margin-bottom: 50px;
 }
 
+#title {
+	margin-bottom: 5px;
+}
+
+/* Counter and buttons */
 #articleCounter {
 	margin-top:20px;
 }
@@ -53,15 +61,18 @@ p.storyNutgraf {
 	margin-right: 28px;
 }
 
+/* Comments */
 .commentBody {
 	margin-bottom: 5px;
 }
+
 .commentDate{
 	font-size:10px;
 	font-style:italic;
 	margin-bottom: 30px;
 }
 
+/* rules for the X button on comments */
 span:hover {
 	cursor: pointer;
 	color: #a2a2a2;
@@ -69,8 +80,4 @@ span:hover {
 
 span {
 	color: #B0171F;
-}
-
-#title {
-	margin-bottom: 5px;
 }
