@@ -68,8 +68,11 @@ module.exports = function(app) {
 
 	// grab comments for an article
 	app.get('/api/comment/:id', function(req, res){
+		// find the article that matches the id from the req.param
 		Articles.findOne({'_id': req.params.id})
+		// populate from the comment objects saved in the article
 		.populate('comment')
+		// execute the command and send success message if it works
 		.exec(function(err, doc){
 			if (err){
 				console.log(err);
@@ -78,19 +81,24 @@ module.exports = function(app) {
 			}
 		});
 	});
+
 	// post a comment
 	app.post('/api/comment/:id', function(req, res){
 	// using the body of the post, create a comment
 	var comment = new Comments(req.body);
 
+		//save the comment
 		comment.save(function(err, doc){
 			if(err){
 				console.log(err);
 			} else {
+				// of everything checks out, find the apropos article
 				Articles.findOneAndUpdate(
+					// save the objectID of the comment to the article's comment array
 					{'_id': req.params.id}, 
 					{$push: {'comment':doc._id}},
 					{safe: true, upsert: true})
+				// execute the comman and send success message if it works
 				.exec(function(err, doc){
 					if (err){
 						console.log(err);
@@ -112,7 +120,7 @@ module.exports = function(app) {
 		// now, find the comment and delete it
 		Comments.find({'_id': c_id}).remove(function(){
 			// and with that done, find the article by it's id,
-			// and remove the comment from the reference property
+			// and remove the comment from the reference array in that article
 			Articles.findOneAndUpdate(
 				{'_id': a_id},
 				{$pull: {'comment':c_id}})
