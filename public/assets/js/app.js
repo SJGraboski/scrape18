@@ -118,7 +118,7 @@ var dispArticle = function(){
 											'<input type="text" class="form-control" id="title" name="title" placeholder="Title">' +
 											'<textarea type="text" class="form-control" id="body" name="body" rows="5" placeholder="Comment Text"></textarea>' +
 										'</div>' +
-										'<button type="submit" id="submit" class="btn btn-primary">Submit</button>' +
+										'<button type="submit" id="submit" class="btn btn-success">Submit</button>' +
 								'</form>';
 
 		// then, place the form on the page
