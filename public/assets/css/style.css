@@ -81,3 +81,16 @@ span:hover {
 span {
 	color: #B0171F;
 }
+
+/* Footer */
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+}
+
+#footer p {
+  margin-bottom: 0;
+}
+
