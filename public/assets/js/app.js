@@ -65,7 +65,7 @@ var dispArticle = function(){
 	var storyNum = $('<p>').addClass('storyNum')
 								 .text("Story #" + (cur_article));
 	var storyTitle = $('<h2>').addClass('storyTitle')
-								 	 .html("<a href='" + article.link + "'>" + article.title + "</a>");
+								 	 .html("<a href='" + article.link + "' target='_blank'>" + article.title + "</a>");
 	var storyNutgraf = $('<p>').addClass('storyNutgraf')
 									   .text(article.nutgraf);
 	// father the div
