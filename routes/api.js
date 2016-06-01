@@ -83,24 +83,47 @@ module.exports = function(app) {
 	// using the body of the post, create a comment
 	var comment = new Comments(req.body);
 
-	comment.save(function(err, doc){
-		if(err){
-			console.log(err);
-		} else {
+		comment.save(function(err, doc){
+			if(err){
+				console.log(err);
+			} else {
+				Articles.findOneAndUpdate(
+					{'_id': req.params.id}, 
+					{$push: {'comment':doc._id}},
+					{safe: true, upsert: true})
+				.exec(function(err, doc){
+					if (err){
+						console.log(err);
+					} else {
+						console.log("ok!")
+						res.status(201).end();
+					}
+				});
+
+			}
+		});
+	});
+
+	app.delete('/api/r-comment/:id', function(req, res){
+		// first, grab the comment id and article id
+		var c_id = req.params.id;
+		var a_id = req.body.a_id;
+		// and make an objectID reference for the comment
+		// now, find the comment and delete it
+		Comments.find({'_id': c_id}).remove(function(){
+			// and with that done, find the article by it's id,
+			// and remove the comment from the reference property
 			Articles.findOneAndUpdate(
-				{'_id': req.params.id}, 
-				{$push: {'comment':doc._id}},
-				{safe: true, upsert: true})
+				{'_id': a_id},
+				{$pull: {'comment':c_id}})
 			.exec(function(err, doc){
 				if (err){
 					console.log(err);
 				} else {
-					console.log("ok!")
-					res.status(201).end();
+					console.log("deleted")
+					res.status(204).end();
 				}
 			});
-
-		}
-	});
-});
+		})
+	})
 }

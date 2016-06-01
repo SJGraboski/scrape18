@@ -7,6 +7,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var methodOverride = require('method-override')
 
 
 
@@ -15,6 +16,9 @@ var app = express();
 
 // use logger in dev mode
 app.use(logger('dev'));
+
+// use method ovveride
+app.use(methodOverride('X-HTTP-Method-Override'))
 
 // set up bodyparse
 app.use(bodyParser.urlencoded({extended: true }));

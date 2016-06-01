@@ -82,10 +82,33 @@ var dispArticle = function(){
 	var url = "api/comment/" + article.id;
 	// then, grab the comments related to the article with a get request
 	$.get(url, function(result){
+		// make the div we'll put our comments in
+		var theDiv = $("<div>").addClass("comments")
 		// save the comments from the result into an array
 		var comments = result.comment;
-		console.log(comments);
+		// go through array, and add comments to the div
+		$.each(comments, function(i){
+			// sub div
+			var c_div = $('<div>').addClass('comment');
+			// title, body and date text
+			var c_title = $('<p>').addClass('commentTitle')
+										 .html(comments[i].title + 
+										 			"<span class='glyphicon glyphicon-remove delete' data-id='"+ comments[i]._id +"'></span>");
+			var c_body = $('<p>').addClass('commentBody')
+										 .text(comments[i].body)
+			var c_date = $('<p>').addClass('commentDate')
+                   .text("- " + moment(comments[i].time).format("MMMM DD, YYYY - hh:mma "));
+			
+			// append the subdiv
+			c_div.append(c_title, c_body, c_date);
+
+			// append the father div
+			theDiv.append(c_div);
+		})
+		// add the father div to the comment's section of the page
+		$('#commentDisplay').html(theDiv);
 	})
+
 
 	// Part3: Display the Comment Form
 	// first, save the form along with the url that we'll be posting to
@@ -124,6 +147,30 @@ var articleSwitch = function(isPrev) {
 	} 
 	// with all that done, display the article
 	dispArticle();
+}
+
+// add delete functionality to spanned X buttons
+var deleteComment = function(span){
+
+	// grab the comment id
+	var commentId = span.attr('data-id');
+
+	// make the url
+	var url = "api/r-comment/" + commentId;
+
+	// grab the article id
+	var data = {
+		a_id: $('.article').attr('data-id')
+	}
+	// make the ajax call
+	$.ajax({
+    url: url,
+    type: 'DELETE',
+    data: data,
+    success: function() {
+      dispArticle();
+    }
+});
 }
 
 // 3. FORM FUNCTIONS
@@ -176,6 +223,13 @@ $(document).on('click', '#next', function(){
 // on pressing comment submit button
 $(document).on('click', '#submit', function(){
 	commentForm();
+	// prevent refresh
+	return false;
+})
+
+// on pressing a delete button
+$(document).on('click', '.delete', function(){
+	deleteComment($(this));
 	// prevent refresh
 	return false;
 })
