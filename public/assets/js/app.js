@@ -191,7 +191,6 @@ var commentForm = function(){
 
 	// make the url from the form's action attr
 	var url = $('#leaveComment').attr('action');
-	debugger;
 	// make the api call
 	$.post(url, data, function(){
 		console.log('ok');
