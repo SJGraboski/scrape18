@@ -91,9 +91,9 @@ var dispArticle = function(){
 			// sub div
 			var c_div = $('<div>').addClass('comment');
 			// title, body and date text
-			var c_title = $('<p>').addClass('commentTitle')
+			var c_title = $('<h4>').addClass('commentTitle')
 										 .html(comments[i].title + 
-										 			"<span class='glyphicon glyphicon-remove delete' data-id='"+ comments[i]._id +"'></span>");
+										 			" <span class='glyphicon glyphicon-remove delete' data-id='"+ comments[i]._id +"'></span>");
 			var c_body = $('<p>').addClass('commentBody')
 										 .text(comments[i].body);
 			var c_date = $('<p>').addClass('commentDate')
