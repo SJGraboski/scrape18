@@ -1,0 +1,28 @@
+{
+  "name": "scrape18",
+  "version": "1.0.0",
+  "description": "scrape18",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SJGraboski/scrape18.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SJGraboski/scrape18/issues"
+  },
+  "homepage": "https://github.com/SJGraboski/scrape18#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "cheerio": "^0.20.0",
+    "express": "^4.13.4",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.4.19",
+    "morgan": "^1.7.0",
+    "request": "^2.72.0"
+  }
+}
